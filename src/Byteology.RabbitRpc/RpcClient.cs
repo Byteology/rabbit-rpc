@@ -1,7 +1,6 @@
-using Byteology.RabbitRpc;
 using RabbitMQ.Client;
 
-namespace MQLib;
+namespace Byteology.RabbitRpc;
 /// <summary>
 /// An RPC client that will send commands executing by an <see cref="RpcServer{TContract}"/> via RabbitMQ.
 /// </summary>

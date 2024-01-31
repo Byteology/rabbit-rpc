@@ -34,11 +34,10 @@
     </None>
   </ItemGroup>
 
-
-
   <ItemGroup>
     <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

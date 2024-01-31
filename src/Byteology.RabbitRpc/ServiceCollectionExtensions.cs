@@ -1,11 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
-using MQLib;
 using RabbitMQ.Client;
 
 namespace Byteology.RabbitRpc;
 
 /// <summary>
-/// Contains extension methods for injecting RPC servers and clients. 
+/// Contains extension methods for injecting RPC clients. 
 /// </summary>
 public static class ServiceCollectionExtensions
 {
@@ -14,7 +13,7 @@ public static class ServiceCollectionExtensions
 	/// </summary>
 	/// <param name="services">The service collection.</param>
 	/// <param name="configureConnection">A callback for building the RabbitMQ connection</param>
-	public static ServiceCollection AddRabbitMQ(this ServiceCollection services, Action<ConnectionFactory> configureConnection)
+	public static IServiceCollection AddRabbitMQ(this IServiceCollection services, Action<ConnectionFactory> configureConnection)
 	{
 		services.AddSingleton<IConnection>(s =>
 		{
@@ -32,7 +31,7 @@ public static class ServiceCollectionExtensions
 	/// </summary>
 	/// <typeparam name="TContract">The contract provided by the server.</typeparam>
 	/// <param name="services">The service collection.</param>
-	public static ServiceCollection AddRpcClient<TContract>(this ServiceCollection services)
+	public static IServiceCollection AddRpcClient<TContract>(this IServiceCollection services)
 		where TContract : class
 	{
 		services.AddScoped<TContract>(s =>
@@ -45,18 +44,6 @@ public static class ServiceCollectionExtensions
 		});
 		services.AddScoped<RpcClient<TContract>>();
 
-		return services;
-	}
-
-	/// <summary>
-	/// Injects a singleton RPC server.
-	/// </summary>
-	/// <typeparam name="TContract">The contract provided by the server.</typeparam>
-	/// <param name="services">The service collection.</param>
-	public static ServiceCollection AddRpcServer<TContract>(this ServiceCollection services)
-		where TContract : class
-	{
-		services.AddSingleton<RpcServer<TContract>>();
 		return services;
 	}
 }

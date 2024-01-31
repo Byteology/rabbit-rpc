@@ -1,18 +1,21 @@
-using MQLib;
-using RabbitMQ.Client;
-using Sample.Contract;
-using Sample.Server;
+using Byteology.RabbitRpc;
+using Example.Contract;
+using Example.Server;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-var factory = new ConnectionFactory { HostName = "localhost", UserName = "guest", Password = "guest", Port = 5672 };
-using IConnection connection = factory.CreateConnection();
-using IModel channel = connection.CreateModel();
-
-
-RpcServer<ISampleContract> server = new(connection, new Service());
-server.Start();
-
-
-
-
-Console.WriteLine(" Press [enter] to exit.");
-Console.ReadLine();
+await Host.CreateDefaultBuilder(args)
+	.ConfigureServices(services =>
+	{
+		services.AddRabbitMQ(connectionFactory =>
+		{
+			connectionFactory.HostName = "localhost";
+			connectionFactory.Port = 5672;
+			connectionFactory.UserName = "guest";
+			connectionFactory.Password = "guest";
+		});
+		services.AddSingleton<ILibraryService, LibraryService>();
+	})
+	.Build()
+	.StartRpcServer<ILibraryService>()
+	.RunAsync();
