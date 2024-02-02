@@ -1,3 +1,5 @@
+[![Nuget](https://img.shields.io/nuget/v/Byteology.RabbitRpc?style=for-the-badge)](https://www.nuget.org/packages/Byteology.RabbitRpc/)
+
 # Byteology.RabbitRpc
 This is a .NET wrapper around RabbitMQ that allows an easy way to setup RPC communication.
 
