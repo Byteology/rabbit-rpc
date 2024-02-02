@@ -39,9 +39,14 @@ public class RpcServer<TContract>
 		if (_isStarted)
 			throw new InvalidOperationException("The server is already started.");
 
+		HashSet<string> queueNames = new();
 		foreach (MethodInfo method in typeof(TContract).GetMethods())
 		{
 			CommandInfo commandInfo = new(method);
+
+			if (queueNames.Contains(commandInfo.RequestQueueName))
+				throw new ArgumentException($"The contract {typeof(TContract).Name} has multiple methods with the same name.");
+			queueNames.Add(commandInfo.RequestQueueName);
 
 			_channel.QueueDeclare(queue: commandInfo.RequestQueueName,
 				 durable: false,
