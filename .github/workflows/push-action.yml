@@ -8,18 +8,29 @@ on:
 jobs:
   build-and-analyze:
     runs-on: ubuntu-latest
+    env:
+      sonar_project_key: Byteology_rabbit-rpc
+      sonar_project_name: rabbit-rpc
+      sonar_organization: byteology
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
     steps:
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 8.0.x
-          
       - name: Checkout
         uses: actions/checkout@v4
         
-      - name: Restore
-        run: dotnet restore src
-        
-      - name: Build
-        run: dotnet build src --configuration Release --no-restore
+      - name: SonarScanner for .NET 8
+        uses: highbyte/sonarscan-dotnet@v2.3.1
+        with:
+          # The key of the SonarQube project
+          sonarProjectKey: ${sonar_project_key}
+          # The name of the SonarQube project
+          sonarProjectName: ${sonar_project_name}
+          # The name of the SonarQube organization in SonarCloud. For hosted SonarQube, skip this setting.
+          sonarOrganization: ${sonar_organization}
+          # Optional command arguments to dotnet build
+          dotnetBuildArguments: ./src --configuration Release
+          # Optional command arguments to dotnet test
+          dotnetTestArguments: ./src --no-build --configuration Release --verbosity normal --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+          # Optional extra command arguments the the SonarScanner 'begin' command
+          sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
