@@ -33,7 +33,7 @@ public class RpcClient<TContract> where TContract : class
 	{
 		TContract proxy = CommandProxy.Create<TContract>(_channel, _responseOrchestrator, out string correlationId);
 		if (cancellationToken != default)
-			_responseOrchestrator.RegisterCancellationToken(cancellationToken, correlationId);
+			_responseOrchestrator.RegisterCancellationToken(correlationId, cancellationToken);
 
 		R result = call(proxy);
 		return Task.FromResult(result);
@@ -48,7 +48,7 @@ public class RpcClient<TContract> where TContract : class
 	{
 		TContract proxy = CommandProxy.Create<TContract>(_channel, _responseOrchestrator, out string correlationId);
 		if (cancellationToken != default)
-			_responseOrchestrator.RegisterCancellationToken(cancellationToken, correlationId);
+			_responseOrchestrator.RegisterCancellationToken(correlationId, cancellationToken);
 
 		call(proxy);
 		return Task.CompletedTask;

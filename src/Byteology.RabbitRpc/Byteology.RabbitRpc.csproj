@@ -11,7 +11,7 @@
     <RepositoryUrl>https://github.com/Byteology/rabbit-rpc.git</RepositoryUrl>
     <PackageIcon>Icon.png</PackageIcon>
     <Description>A wrapper for RPC communication arround RabbitMQ.</Description>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <PackageTags>RPC RabbitMQ</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Byteology/rabbit-rpc</PackageProjectUrl>

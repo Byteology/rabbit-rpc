@@ -71,10 +71,8 @@ internal class ResponseOrchestrator
 			taskCompletionSource.SetCanceled();
 	}
 
-	public void RegisterCancellationToken(CancellationToken token, string correlationId)
+	public void RegisterCancellationToken(string correlationId, CancellationToken token)
 	{
 		token.Register(() => CancelTask(correlationId));
 	}
-
-
 }
