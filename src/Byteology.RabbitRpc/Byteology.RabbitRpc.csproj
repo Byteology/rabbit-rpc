@@ -10,7 +10,7 @@
     <Company>Byteology Ltd</Company>
     <RepositoryUrl>https://github.com/Byteology/rabbit-rpc.git</RepositoryUrl>
     <PackageIcon>Icon.png</PackageIcon>
-    <Description>A wrapper for RPC communication arround RabbitMQ.</Description>
+    <Description>A wrapper for RPC communication around RabbitMQ.</Description>
     <Version>1.0.1</Version>
     <PackageTags>RPC RabbitMQ</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
