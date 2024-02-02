@@ -42,7 +42,7 @@ internal class CommandInfo
 	/// </summary>
 	/// <param name="contractType">The contract type to be used for resolving the method.</param>
 	/// <param name="queueName">The request queue name.</param> 
-	public CommandInfo(Type contractType, string queueName) : this(contractType.GetMethod(queueName.Split('.').Last())!) { }
+	public CommandInfo(Type contractType, string queueName) : this(contractType.GetMethod(queueName.Split('.')[^1])!) { }
 
 	/// <summary>
 	/// Invokes the actual implementation of the request.

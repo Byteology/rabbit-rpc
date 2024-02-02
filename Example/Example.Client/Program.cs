@@ -21,5 +21,5 @@ IHost host = Host.CreateDefaultBuilder(args)
 	})
 	.Build();
 
-//host.Services.GetRequiredService<SimpleExampleWithDI>().Start();
-host.Services.GetRequiredService<AdvancedExample>().Start();
+// host.Services.GetRequiredService<SimpleExample>().Start(); 
+await host.Services.GetRequiredService<AdvancedExample>().Start();

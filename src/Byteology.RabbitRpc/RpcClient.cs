@@ -11,7 +11,7 @@ public class RpcClient<TContract> where TContract : class
 	/// <summary>
 	/// used for synchronizing the request and response threads as well as cancelling response awaiting.
 	/// </summary>
-	private ResponseOrchestrator _responseOrchestrator;
+	private readonly ResponseOrchestrator _responseOrchestrator;
 
 	/// <summary>
 	/// Creates a new RPC client that will send commands executing by an <see cref="RpcServer{TContract}"/>

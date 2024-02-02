@@ -38,6 +38,7 @@
     <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="9.19.0.84025" />
   </ItemGroup>
 
 </Project>

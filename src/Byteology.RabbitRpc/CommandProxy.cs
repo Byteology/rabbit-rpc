@@ -47,7 +47,7 @@ internal class CommandProxy : DispatchProxy
 		{
 			IBasicProperties props = _channel.CreateBasicProperties();
 			props.CorrelationId = _correlationId;
-			props.ReplyTo = _responseOrchestrator.ReplyQueueName; ;
+			props.ReplyTo = _responseOrchestrator.ReplyQueueName;
 
 			byte[] data = commandInfo.SerializeRequest(args);
 

@@ -4,6 +4,14 @@ using RabbitMQ.Client.Events;
 
 namespace Byteology.RabbitRpc;
 
+internal static class RpcServer
+{
+	/// <summary>
+	/// This ensures that running servers won't be garbage collected
+	/// </summary>
+	public static readonly List<object> RunningServers = [];
+}
+
 /// <summary>
 /// A class that represents an RPC server that implements a provided contract.
 /// </summary>
@@ -11,11 +19,6 @@ namespace Byteology.RabbitRpc;
 public class RpcServer<TContract>
 	where TContract : class
 {
-	/// <summary>
-	/// This ensures that running servers won't be garbage collected
-	/// </summary>
-	private static List<object> _runningServers = new();
-
 	private readonly IModel _channel;
 	private readonly TContract _contractImplementation;
 	private bool _isStarted;
@@ -63,7 +66,7 @@ public class RpcServer<TContract>
 		}
 
 		_isStarted = true;
-		_runningServers.Add(this);
+		RpcServer.RunningServers.Add(this);
 	}
 
 	/// <summary>
