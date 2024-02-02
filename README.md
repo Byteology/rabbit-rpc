@@ -1,5 +1,9 @@
 [![Nuget](https://img.shields.io/nuget/v/Byteology.RabbitRpc?style=for-the-badge)](https://www.nuget.org/packages/Byteology.RabbitRpc/)
 
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Byteology_rabbit-rpc&metric=security_rating)](https://sonarcloud.io/dashboard?id=Byteology_rabbit-rpc) 
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Byteology_rabbit-rpc&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=Byteology_rabbit-rpc)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Byteology_rabbit-rpc&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=Byteology_rabbit-rpc)
+
 # Byteology.RabbitRpc
 This is a .NET wrapper around RabbitMQ that allows an easy way to setup RPC communication.
 
