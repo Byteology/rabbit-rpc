@@ -3,6 +3,20 @@ This is a .NET wrapper around RabbitMQ that allows an easy way to setup RPC comm
 
 For more information refer to the [RabbitMQ documentation](https://www.rabbitmq.com/tutorials/tutorial-six-dotnet.html).
 
+## Table of Contents
+- [Contract](#contract)
+    - [Contract Example](#contract-example)
+- [Establishing Connection to RabbitMQ](#stablishing-connection-to-Rabbitmq)
+    - [Injecting a RabbitMQ Connection](#injecting-a-rabbitmq-connection)
+- [RPC Server](#rpc-server)
+    - [Contract Implementation Example](#contract-implementation-example)
+    - [Starting an RPC Server](#starting-an-rpc-server)
+        - [Using Dependency Injection](#using-dependency-injection)
+- [RPC Client](#rpc-client)
+    - [Simple Usage](#simple-usage)
+    - [Advanced Usage](#advanced-usage)
+    - [Usage Without Dependency Injection](#usage-without-dependency-injection)
+
 ## Contract
 The RPC server should expose some sort of contract in the form of an interface. The contract has the following limitations:
 1. No two methods of the contract may have the same name. The reason for that is that the fully qualified name of the interface followed by the name of each method is used to uniquely identify a queue name via which the request communication will happen.
@@ -147,6 +161,16 @@ public class AdvancedExample
 }
 ```
 The `CallAsync` method additionally accepts an optional `CancellationToken` argument which allows you to cancel the call. Note that the call might already be queued or executed by the server in which case the token will only cancel the consumption of the response and it will clear it from the response queue.
+
+### Usage Without Dependency Injection
+The `RpcCleint<>` class can be directly constructed by simply providing an open RabbitMQ connection
+``` c#
+IConnection rabbitMqConnection;
+// Initialize the RabbitMQ connection
+// ...
+
+RpcServer<ILibraryService> client = new (rabbitMqConnection);
+```
 
 ## Full Example
 A full example of this library's usage can be found [here](https://github.com/Byteology/rabbit-rpc/tree/master/Example).
