@@ -160,7 +160,7 @@ public class AdvancedExample
   }
 
   public async void CallServer()
-	{
+  {
     IEnumerable<Book> tolkienBooks = await _libraryClient.CallAsync(x => x.GetBooksByAuthor("J.R.R.Tolkien"));
     foreach (Book book in tolkienBooks)
       Console.WriteLine(book.Name);
